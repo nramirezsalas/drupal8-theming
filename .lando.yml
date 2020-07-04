@@ -1,0 +1,9 @@
+name: drupal8-theming
+recipe: drupal8
+config:
+  webroot: ./web/
+  php: '7.4'
+  via: apache
+  database: mysql
+  drush: ^9
+  xdebug: false
