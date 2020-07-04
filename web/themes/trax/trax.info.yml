@@ -12,4 +12,7 @@ regions:
   page_top: Page Top
   page_bottom: Page Bottom
 
+libraries:
+  - 'trax/global-css'
+  - 'trax/global-js'
 

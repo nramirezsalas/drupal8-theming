@@ -13,12 +13,13 @@
  ----------------------------------------------------------------------*/
 
 //PAGE LOADER
+/*
 $(window).on("load", function () {
     "use strict";
     $(".loader").fadeOut(800);
     $('.side-menu').removeClass('opacity-0');
 });
-
+*/
 
 jQuery($=> {
     "use strict";
