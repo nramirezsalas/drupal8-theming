@@ -11,6 +11,7 @@ global-css:
       html/css/revolution/navigation.css: {}
       html/css/revolution/settings.css: {}
       html/css/style.css: {}
+      html/css/app.css: {}
 global-js:
   js:
     html/js/propper.min.js: {}
@@ -34,4 +35,6 @@ global-js:
     html/js/revolution/extensions/revolution.extension.parallax.min.js: {}
     html/js/revolution/extensions/revolution.extension.slideanims.min.js: {}
     html/js/revolution/extensions/revolution.extension.video.min.js: {}
+    https://maps.googleapis.com/maps/api/js?key=AIzaSyAgIfLQi8KTxTJahilcem6qHusV-V6XXjw: {type:external}
+    html/js/map.js: {}
     html/js/functions.js: {}
