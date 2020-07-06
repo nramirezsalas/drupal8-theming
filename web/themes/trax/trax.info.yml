@@ -9,6 +9,7 @@ regions:
   sidebar: Sidebar
   content: Content
   footer: Footer
+  bloques_twig: Bloques para templates twig
   page_top: Page Top
   page_bottom: Page Bottom
 

@@ -20,6 +20,8 @@
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6.5",
         "drupal/admin_toolbar": "^2.3",
+        "drupal/asset_injector": "^2.7",
+        "drupal/ckeditor_codemirror": "^2.3",
         "drupal/console": "^1.0.2",
         "drupal/core": "^8.8.0",
         "drupal/core-composer-scaffold": "^8.8.0",
@@ -28,6 +30,7 @@
         "drush/drush": "^9.7.1 | ^10.0.0",
         "vlucas/phpdotenv": "^4.0",
         "webflo/drupal-finder": "^1.0.0",
+        "wikimedia/composer-merge-plugin": "^1.4",
         "zaporylie/composer-drupal-optimizations": "^1.0"
     },
     "require-dev": {
@@ -79,5 +82,10 @@
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"]
         }
+    },
+    "merge-plugin": {
+        "include": [
+            "web/modules/contrib/ckeditor_codemirror/composer.libraries.json"
+        ]
     }
 }
