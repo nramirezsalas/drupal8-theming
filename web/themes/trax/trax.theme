@@ -11,7 +11,8 @@ use Drupal\media_entity\MediaInterface;
 use Drupal\file\Entity\File;
 use Drupal\taxonomy\TermInterface;
 
-function trax_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+function trax_theme_suggestions_page_alter(array &$suggestions, array $variables)
+{
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     $content_type = $node->bundle();
     $suggestions[] = 'page__' . $content_type;
@@ -24,8 +25,7 @@ function trax_theme_suggestions_page_alter(array &$suggestions, array $variables
     if ($current_uri_pos > 0) {
       $current_uri = substr($current_uri, 0, $current_uri_pos);
       $suggestions[] = 'page__node__' . $current_uri;
-    }
-    else {
+    } else {
       $suggestions[] = 'page__node__' . $current_uri;
     }
 
@@ -39,7 +39,8 @@ function trax_theme_suggestions_page_alter(array &$suggestions, array $variables
   }
 }
 
-function trax_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+function trax_theme_suggestions_block_alter(array &$suggestions, array $variables)
+{
   if (isset($variables['elements']['content']['#block_content'])) {
     //$info = strtolower($variables['elements']['content']['#block_content']->get('info')->value);
     //$info = cleanString($info);
@@ -48,7 +49,8 @@ function trax_theme_suggestions_block_alter(array &$suggestions, array $variable
   }
 }
 
-function trax_theme_suggestions_alter(array &$suggestions, array $variables) {
+function trax_theme_suggestions_alter(array &$suggestions, array $variables)
+{
   if (isset($variables['element']) && isset($variables['element']['#type']) && $variables['element']['#type'] == 'form') {
     $original_theme_hook = $variables['theme_hook_original'];
     $suggestions[] = $original_theme_hook . '__' . str_replace('-', '_', $variables['element']['#id']);
@@ -57,7 +59,8 @@ function trax_theme_suggestions_alter(array &$suggestions, array $variables) {
 }
 
 function trax_theme_suggestions_paragraph_alter(&$suggestions,
-                                                    $variables) {
+                                                $variables)
+{
   $paragraph = $variables['elements']['#paragraph'];
   $parent = $paragraph->getParentEntity();
   if ($parent) {
@@ -65,7 +68,8 @@ function trax_theme_suggestions_paragraph_alter(&$suggestions,
   }
 }
 
-function trax_preprocess_html(&$variables) {
+function trax_preprocess_html(&$variables)
+{
   if ($node = \Drupal::request()->attributes->get('node')) {
     $variables['attributes']['class'][] = 'page-node-' . $node->id();
   }
@@ -74,7 +78,8 @@ function trax_preprocess_html(&$variables) {
     ->getAliasByPath($current_path);
 }
 
-function trax_preprocess_page(&$variables) {
+function trax_preprocess_page(&$variables)
+{
 
   // Para mostrar campos Taxonomy en Page
   if (\Drupal::routeMatch()
@@ -94,8 +99,7 @@ function trax_preprocess_page(&$variables) {
         if ($term_image) {
           $term_image = file_create_url($term_image->getFileUri());
           $variables['term_image'] = $term_image;
-        }
-        else {
+        } else {
           $variables['term_image'] = '';
         }
         break;
@@ -105,7 +109,8 @@ function trax_preprocess_page(&$variables) {
   }
 }
 
-function trax_preprocess_node(&$variables) {
+function trax_preprocess_node(&$variables)
+{
   $node = $variables['node'];
   $node_id = $node->id();
   $bundle = $node->bundle();
@@ -127,7 +132,8 @@ function trax_preprocess_node(&$variables) {
 
 }
 
-function trax_preprocess_block(&$variables) {
+function trax_preprocess_block(&$variables)
+{
   $uuid = $variables['derivative_plugin_id'];
 
   if ($uuid) {
@@ -137,6 +143,18 @@ function trax_preprocess_block(&$variables) {
     if ($block) {
       $block_type = $block->bundle();
 
+      if ($block_type == 'counter') {
+        $numero1_numero = $block->get('field_numero_velocidad')->first;
+        $numero1_velocidad = $block->get('field_numero_velocidad')->second;
+        $variables['numero1_numero'] = $numero1_numero;
+        $variables['numero1_velocidad'] = $numero1_velocidad;
+
+        $numero2_numero = $block->get('field_numero_velocidad_2')->first;
+        $numero2_velocidad = $block->get('field_numero_velocidad_2')->second;
+        $variables['numero2_numero'] = $numero2_numero;
+        $variables['numero2_velocidad'] = $numero2_velocidad;
+      }
+
       if ($block_type == 'banner_fondo') {
         //$variables['body'] = $block->get('body')->value;
         $image = $block->get('field_imagen_fondo')->entity;
@@ -144,8 +162,7 @@ function trax_preprocess_block(&$variables) {
           $img = file_create_url($image->getFileUri());
           $variables['background'] = 'background: url("' . $img . '")';
           $variables['image'] = $img;
-        }
-        else {
+        } else {
           $variables['background'] = '';
           $variables['image'] = '';
         }
@@ -159,8 +176,7 @@ function trax_preprocess_block(&$variables) {
         $alerta = $block->get('field_activar_alerta')->value;
         if ($alerta == 1) {
           $variables['alerta'] = $alerta;
-        }
-        else {
+        } else {
           $variables['alerta'] = $alerta;
         }
       }
@@ -169,7 +185,8 @@ function trax_preprocess_block(&$variables) {
   }
 }
 
-function trax_preprocess_taxonomy_term(&$variables) {
+function trax_preprocess_taxonomy_term(&$variables)
+{
   $term = $variables['term'];
   $variables['url'] = $term->url();
   $bundle = $term->bundle();
@@ -189,7 +206,8 @@ function trax_preprocess_taxonomy_term(&$variables) {
 
 
 // funciones personalizadas
-function _date_custom($date, $format_date) {
+function _date_custom($date, $format_date)
+{
   $tz = new DateTimeZone('Pacific/Honolulu');
   $date = new DateTime($date);
   $date->setTimezone($tz);
