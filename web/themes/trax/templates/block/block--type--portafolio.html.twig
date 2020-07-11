@@ -1,0 +1,73 @@
+{#
+/**
+ * @file
+ * Theme override to display a block.
+ *
+ * Available variables:
+ * - plugin_id: The ID of the block implementation.
+ * - label: The configured label of the block if visible.
+ * - configuration: A list of the block's configuration values.
+ *   - label: The configured label for the block.
+ *   - label_display: The display settings for the label.
+ *   - provider: The module or other provider that provided this block plugin.
+ *   - Block plugin specific settings will also be stored here.
+ * - content: The content of this block.
+ * - attributes: array of HTML attributes populated by modules, intended to
+ *   be added to the main container tag of this template.
+ *   - id: A valid HTML ID and guaranteed unique.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+<section id="portfolio" class="position-relative padding contextual-region">
+  {{ title_prefix }}
+  {% if label %}
+    <h2{{ title_attributes }}>{{ label }}</h2>
+  {% endif %}
+  {{ title_suffix }}
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center wow fadeIn" data-wow-delay="300ms">
+        {{ content.field_titulo_html|field_value }}
+      </div>
+
+      <div class="col-lg-12">
+        {{ content.body }}
+      </div>
+
+      <div class="col-lg-12">
+        <div id="grid-mosaic" class="cbp cbp-l-grid-mosaic-flat">
+          {{ content.field_items_portafolio|field_value }}
+        </div>
+
+        <div class="col-lg-12">
+          <!--Load more item from another html file using ajax-->
+          <div class="cbp-l-loadMore-button">
+            <a href="#"
+               class="cbp-l-loadMore-link border-0 font-13 button gradient-btn whitecolor transition-3" rel="nofollow">
+              <span class="cbp-l-loadMore-defaultText">Ver todo el portafolio</span>
+            </a>
+          </div>
+
+          {#          <div id="js-loadMore-mosaic" class="cbp-l-loadMore-button ">#}
+          {#            <a href="load-more.html"#}
+          {#               class="cbp-l-loadMore-link border-0 font-13 button gradient-btn whitecolor transition-3" rel="nofollow">#}
+          {#              <span class="cbp-l-loadMore-defaultText">Ver todo el portafolio (<span#}
+          {#                  class="cbp-l-loadMore-loadItems">6</span>)</span>#}
+          {#              <span class="cbp-l-loadMore-loadingText">Loading <i class="fas fa-spinner fa-spin"></i></span>#}
+          {#              <span class="cbp-l-loadMore-noMoreLoading d-none">NO MORE WORKS</span>#}
+          {#            </a>#}
+          {#          </div>#}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
